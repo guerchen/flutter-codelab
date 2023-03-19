@@ -1,6 +1,9 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/like_button.dart';
+import '../components/next_button.dart';
+import '../components/big_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -157,81 +160,6 @@ class FavoritesPage extends StatelessWidget {
             title: Text(favorite.asString),
           )
       ],
-    );
-  }
-}
-
-class NextButton extends StatelessWidget {
-  const NextButton({
-    super.key,
-    required this.appState,
-  });
-
-  final MyAppState appState;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        appState.getNext();
-      },
-      child: Text('Next'),
-    );
-  }
-}
-
-class LikeButton extends StatelessWidget {
-  const LikeButton({
-    super.key,
-    required this.appState,
-  });
-
-  final MyAppState appState;
-
-  @override
-  Widget build(BuildContext context) {
-    IconData icon;
-    if (appState.favorites.contains(appState.current)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
-
-    return ElevatedButton.icon(
-      onPressed: () {
-        appState.toggleFavorite();
-      },
-      icon: Icon(icon),
-      label: Text('Like'),
-    );
-  }
-}
-
-class BigCard extends StatelessWidget {
-  const BigCard({
-    super.key,
-    required this.pair,
-  });
-
-  final WordPair pair;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final style = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-
-    return Card(
-      color: theme.colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
-        ),
-      ),
     );
   }
 }
